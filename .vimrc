@@ -26,6 +26,7 @@ call vundle#end()
 
 let python_highlight_all=1
 let g:ackprg = 'ag --vimgrep'
+let g:syntastic_python_flake8_post_args='--ignore=E501'
 
 filetype plugin indent on
 au BufNewFile,BufRead *.py
