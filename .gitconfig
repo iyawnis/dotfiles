@@ -3,7 +3,7 @@
         email = 
 [core]
         editor = vim
-        autocrlf = true
+        autocrlf = input
 [push]
         default = simple
 [alias]
