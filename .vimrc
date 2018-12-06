@@ -11,6 +11,18 @@ set hls
 set wildignore+=*.swp,*.pyc
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+set statusline=
+set statusline+=%{StatuslineGit()}
+set statusline+=\ %F
+set statusline+=%m\
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %l:%c
+set statusline+=\
+set laststatus=2
+
 syntax on
 
 call vundle#begin()
