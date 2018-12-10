@@ -11,16 +11,25 @@ set hls
 set wildignore+=*.swp,*.pyc
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+ endfunction
+
 set statusline=
 set statusline+=%{StatuslineGit()}
 set statusline+=\ %F
-set statusline+=%m\
+set statusline+=%m\ 
 set statusline+=%=
 set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %l:%c
-set statusline+=\
+set statusline+=\ 
 set laststatus=2
 
 syntax on
@@ -51,6 +60,9 @@ au BufNewFile,BufRead *.py
 
 " Removes trailing spaces
 function TrimWhiteSpace()
+   if &ft =~ 'vim'
+       return
+   endif
    %s/\s*$//
      ''
 endfunction
