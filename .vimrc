@@ -33,6 +33,8 @@ set statusline+=\
 set laststatus=2
 
 syntax on
+set background=dark
+colorscheme solarized
 
 call vundle#begin()
 
