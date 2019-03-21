@@ -1,23 +1,72 @@
-import atexit
-import inspect
-from trepan.api import run_eval
+#######################
+# IMPORTS & CONSTANTS #
+#######################
+
+import imp
 import os
-import readline
-import rlcompleter
+import sys
+import re
+import threading
+import time
 
-historyPath = os.path.expanduser("~/.pyhistory")
+VIRTUAL_ENV = os.environ.get('VIRTUAL_ENV', None)
+HOME = VIRTUAL_ENV or os.environ.get('WORKON_HOME', None) or os.environ['HOME']
 
-def save_history(historyPath=historyPath):
+#################################
+# SAVE & RESTORE HISTORY STATES #
+#################################
+
+try:
     import readline
-    readline.write_history_file(historyPath)
+except ImportError:
+    pass
+else:
 
-if os.path.exists(historyPath):
-    readline.read_history_file(historyPath)
+    ##################
+    # TAB COMPLETION #
+    ##################
 
-atexit.register(save_history)
-del os, atexit, readline, rlcompleter, save_history, historyPath
+    try:
+        import rlcompleter
+    except ImportError:
+        pass
+    else:
+        if(sys.platform == 'darwin'):
+            # Work around a bug in Mac OS X's readline module.
+            readline.parse_and_bind("bind ^I rl_complete")
+        else:
+            readline.parse_and_bind("tab: complete")
 
-def debug(str):
-  frame = inspect.currentframe()
-  return run_eval(str, globals_=frame.f_globals, locals_=frame.f_locals)
-print(".pystartup loaded")
+    ######################
+    # PERSISTENT HISTORY #
+    ######################
+
+    # Use separate history files for each virtual environment.
+    HISTFILE = os.path.join(HOME, '.pyhistory')
+
+    # Read the existing history if there is one.
+    if os.path.exists(HISTFILE):
+        try:
+            readline.read_history_file(HISTFILE)
+        except:
+            # If there was a problem reading the history file then it may have
+            # become corrupted, so we just delete it.
+            os.remove(HISTFILE)
+
+    # Set maximum number of commands written to the history file.
+    readline.set_history_length(256)
+
+    def savehist():
+        try:
+            readline.write_history_file(HISTFILE)
+        except NameError:
+            pass
+        except Exception as err:
+            print("Unable to save history file due to the following error: %s"
+                  % err)
+
+    # Register the ``savehist`` function to run when the user exits the shell.
+    import atexit
+    atexit.register(savehist)
+
+print('Loaded .pythonrc')
