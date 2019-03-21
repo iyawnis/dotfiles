@@ -22,3 +22,5 @@ Install AG:
 `$ choco install ag`
 
 
+Python Shell history
+https://gist.github.com/fkorling/3926900
