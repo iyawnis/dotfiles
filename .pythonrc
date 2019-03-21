@@ -29,6 +29,7 @@ else:
     try:
         import rlcompleter
     except ImportError:
+        print('readline module not available. History disabled')
         pass
     else:
         if(sys.platform == 'darwin'):
