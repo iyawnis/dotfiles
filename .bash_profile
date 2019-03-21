@@ -13,4 +13,4 @@ export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
-export PYTHONSTARTUP=$HOME/.pystartup
+export PYTHONSTARTUP=$HOME/.pythonrc
