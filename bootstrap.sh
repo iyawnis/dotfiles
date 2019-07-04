@@ -16,4 +16,4 @@ echo "Install python dev requirements"
 
 sudo apt-get install -y build-essential
 sudo apt-get install -y libbz2-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev tk-dev liblzma-dev
-sudo apt-get install -y python3-dev
+sudo apt-get install -y python3-dev python3-venv
