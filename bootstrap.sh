@@ -1,4 +1,5 @@
 sudo apt-get update
+sudo apt-get upgrade
 
 echo "Preparing Docker installation"
 echo ""
