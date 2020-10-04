@@ -5,11 +5,12 @@ echo "Preparing Docker installation"
 echo ""
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" -y
+sudo add-apt-repository ppa:longsleep/golang-backports -y
 
 sudo apt-get update
 
-sudo apt-get --assume-yes  install docker-ce docker-ce-cli containerd.io
+sudo apt-get --assume-yes  install docker-ce docker-ce-cli containerd.io golang-go
 
 echo "Docker installation complete"
 echo ""
