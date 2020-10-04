@@ -1,6 +1,7 @@
+# This is Git's per-user configuration file.
 [user]
-        name = 
-        email = 
+    name = s
+    email = 
 [core]
         editor = vim
         autocrlf = input
@@ -10,3 +11,11 @@
         up = pull --rebase --prune
 
         delete-merged-branches = "!git checkout master && git up && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+[diff]
+        tool = vimdiff
+[difftool]
+        prompt = false
+        trustExitCode = true
+[merge]
+        tool = vimdiff
