@@ -30,8 +30,15 @@ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 
-sudo apt-get install -y python3.7 python3.7-dev python3-venv python3-tk libsnappy-dev r-base
+sudo apt-get install -y python3.7 python3.7-dev python3-venv python3-tk libsnappy-dev r-base python3-pip
+
+pip3 install --upgrade pip
+pip install --upgrade pip
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 10
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 10
+sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
+
+python -m pip install pipenv
 
 echo "Python requirements installed"
 
