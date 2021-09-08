@@ -1,6 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
-    name = s
+    name = 
     email = 
 [core]
         editor = vim
@@ -8,9 +8,12 @@
 [push]
         default = simple
 [alias]
-        up = pull --rebase --prune
+	    defaultbranch = "!f() { git symbolic-ref refs/remotes/origin/HEAD | cut -d/ -f4; }; f"
 
-        delete-merged-branches = "!git checkout master && git up && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+        up = pull --rebase --prune
+        rb='git rebase -i `git merge-base head origin/$(git defaultbranch)`'
+
+        delete-merged-branches = "!git checkout $(git defaultbranch) && git up && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
 [diff]
         tool = vimdiff
